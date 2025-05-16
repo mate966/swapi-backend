@@ -10,6 +10,12 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Navigation } from './collections/Navigation'
+import { Films } from './collections/Films'
+import { Characters } from './collections/Characters'
+import { Planets } from './collections/Planets'
+import { Species } from './collections/Species'
+import { Starships } from './collections/Starships'
+import { Vehicles } from './collections/Vehicles'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Navigation],
+  collections: [Users, Media, Navigation, Films, Characters, Planets, Species, Starships, Vehicles],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

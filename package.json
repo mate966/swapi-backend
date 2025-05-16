@@ -12,14 +12,18 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "fetch:data": "cross-env NODE_OPTIONS=--no-deprecation node --loader ts-node/esm src/utils/fetchAllData.ts",
+    "update:relations": "cross-env NODE_OPTIONS=--no-deprecation node --loader ts-node/esm src/utils/updateRelations.ts"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.33.0",
     "@payloadcms/next": "3.33.0",
     "@payloadcms/payload-cloud": "3.33.0",
     "@payloadcms/richtext-lexical": "3.33.0",
+    "axios": "^1.9.0",
     "cross-env": "^7.0.3",
+    "dotenv": "^16.5.0",
     "graphql": "^16.8.1",
     "next": "15.3.0",
     "payload": "3.33.0",
@@ -35,6 +39,7 @@
     "eslint": "^9.16.0",
     "eslint-config-next": "15.3.0",
     "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
     "typescript": "5.7.3"
   },
   "engines": {

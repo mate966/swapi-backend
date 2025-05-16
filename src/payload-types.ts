@@ -70,6 +70,12 @@ export interface Config {
     users: User;
     media: Media;
     navigation: Navigation;
+    films: Film;
+    characters: Character;
+    planets: Planet;
+    species: Species;
+    starships: Starship;
+    vehicles: Vehicle;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -79,6 +85,12 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
+    films: FilmsSelect<false> | FilmsSelect<true>;
+    characters: CharactersSelect<false> | CharactersSelect<true>;
+    planets: PlanetsSelect<false> | PlanetsSelect<true>;
+    species: SpeciesSelect<false> | SpeciesSelect<true>;
+    starships: StarshipsSelect<false> | StarshipsSelect<true>;
+    vehicles: VehiclesSelect<false> | VehiclesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -177,6 +189,140 @@ export interface Navigation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "films".
+ */
+export interface Film {
+  id: string;
+  title: string;
+  episodeID: string;
+  opening_crawl?: string | null;
+  director?: string | null;
+  producer?: string | null;
+  release_date?: string | null;
+  species?: (string | Species)[] | null;
+  starships?: (string | Starship)[] | null;
+  vehicles?: (string | Vehicle)[] | null;
+  characters?: (string | Character)[] | null;
+  planets?: (string | Planet)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "species".
+ */
+export interface Species {
+  id: string;
+  name: string;
+  classification?: string | null;
+  designation?: string | null;
+  average_height?: string | null;
+  average_lifespan?: string | null;
+  eye_colors?: string | null;
+  hair_colors?: string | null;
+  skin_colors?: string | null;
+  language?: string | null;
+  homeworld?: (string | null) | Planet;
+  people?: (string | Character)[] | null;
+  films?: (string | Film)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "planets".
+ */
+export interface Planet {
+  id: string;
+  name: string;
+  diameter?: string | null;
+  rotation_period?: string | null;
+  orbital_period?: string | null;
+  gravity?: string | null;
+  population?: string | null;
+  climate?: string | null;
+  terrain?: string | null;
+  surface_water?: string | null;
+  residents?: (string | Character)[] | null;
+  films?: (string | Film)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "characters".
+ */
+export interface Character {
+  id: string;
+  name: string;
+  birth_year?: string | null;
+  eye_color?: string | null;
+  gender?: string | null;
+  hair_color?: string | null;
+  height?: string | null;
+  mass?: string | null;
+  skin_color?: string | null;
+  homeworld?: (string | null) | Planet;
+  films?: (string | Film)[] | null;
+  species?: (string | Species)[] | null;
+  starships?: (string | Starship)[] | null;
+  vehicles?: (string | Vehicle)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "starships".
+ */
+export interface Starship {
+  id: string;
+  name: string;
+  model?: string | null;
+  starship_class?: string | null;
+  manufacturer?: string | null;
+  cost_in_credits?: string | null;
+  length?: string | null;
+  crew?: string | null;
+  passengers?: string | null;
+  max_atmosphering_speed?: string | null;
+  hyperdrive_rating?: string | null;
+  cargo_capacity?: string | null;
+  consumables?: string | null;
+  films?: (string | Film)[] | null;
+  pilots?: (string | Character)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vehicles".
+ */
+export interface Vehicle {
+  id: string;
+  name: string;
+  model?: string | null;
+  vehicle_class?: string | null;
+  manufacturer?: string | null;
+  length?: string | null;
+  cost_in_credits?: string | null;
+  crew?: string | null;
+  passengers?: string | null;
+  max_atmosphering_speed?: string | null;
+  cargo_capacity?: string | null;
+  consumables?: string | null;
+  films?: (string | Film)[] | null;
+  pilots?: (string | Character)[] | null;
+  swapiId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -193,6 +339,30 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'navigation';
         value: string | Navigation;
+      } | null)
+    | ({
+        relationTo: 'films';
+        value: string | Film;
+      } | null)
+    | ({
+        relationTo: 'characters';
+        value: string | Character;
+      } | null)
+    | ({
+        relationTo: 'planets';
+        value: string | Planet;
+      } | null)
+    | ({
+        relationTo: 'species';
+        value: string | Species;
+      } | null)
+    | ({
+        relationTo: 'starships';
+        value: string | Starship;
+      } | null)
+    | ({
+        relationTo: 'vehicles';
+        value: string | Vehicle;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -289,6 +459,134 @@ export interface NavigationSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "films_select".
+ */
+export interface FilmsSelect<T extends boolean = true> {
+  title?: T;
+  episodeID?: T;
+  opening_crawl?: T;
+  director?: T;
+  producer?: T;
+  release_date?: T;
+  species?: T;
+  starships?: T;
+  vehicles?: T;
+  characters?: T;
+  planets?: T;
+  swapiId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "characters_select".
+ */
+export interface CharactersSelect<T extends boolean = true> {
+  name?: T;
+  birth_year?: T;
+  eye_color?: T;
+  gender?: T;
+  hair_color?: T;
+  height?: T;
+  mass?: T;
+  skin_color?: T;
+  homeworld?: T;
+  films?: T;
+  species?: T;
+  starships?: T;
+  vehicles?: T;
+  swapiId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "planets_select".
+ */
+export interface PlanetsSelect<T extends boolean = true> {
+  name?: T;
+  diameter?: T;
+  rotation_period?: T;
+  orbital_period?: T;
+  gravity?: T;
+  population?: T;
+  climate?: T;
+  terrain?: T;
+  surface_water?: T;
+  residents?: T;
+  films?: T;
+  swapiId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "species_select".
+ */
+export interface SpeciesSelect<T extends boolean = true> {
+  name?: T;
+  classification?: T;
+  designation?: T;
+  average_height?: T;
+  average_lifespan?: T;
+  eye_colors?: T;
+  hair_colors?: T;
+  skin_colors?: T;
+  language?: T;
+  homeworld?: T;
+  people?: T;
+  films?: T;
+  swapiId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "starships_select".
+ */
+export interface StarshipsSelect<T extends boolean = true> {
+  name?: T;
+  model?: T;
+  starship_class?: T;
+  manufacturer?: T;
+  cost_in_credits?: T;
+  length?: T;
+  crew?: T;
+  passengers?: T;
+  max_atmosphering_speed?: T;
+  hyperdrive_rating?: T;
+  cargo_capacity?: T;
+  consumables?: T;
+  films?: T;
+  pilots?: T;
+  swapiId?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "vehicles_select".
+ */
+export interface VehiclesSelect<T extends boolean = true> {
+  name?: T;
+  model?: T;
+  vehicle_class?: T;
+  manufacturer?: T;
+  length?: T;
+  cost_in_credits?: T;
+  crew?: T;
+  passengers?: T;
+  max_atmosphering_speed?: T;
+  cargo_capacity?: T;
+  consumables?: T;
+  films?: T;
+  pilots?: T;
+  swapiId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
