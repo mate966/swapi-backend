@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
-export const Planets: CollectionConfig = {
-  slug: 'planets',
+export const VehiclesCollection: CollectionConfig = {
+  slug: 'vehicles',
   admin: {
     useAsTitle: 'name',
     group: 'Compendium',
@@ -14,48 +14,56 @@ export const Planets: CollectionConfig = {
       index: true,
     },
     {
-      name: 'diameter',
+      name: 'model',
       type: 'text',
     },
     {
-      name: 'rotation_period',
+      name: 'vehicle_class',
       type: 'text',
     },
     {
-      name: 'orbital_period',
+      name: 'manufacturer',
       type: 'text',
     },
     {
-      name: 'gravity',
+      name: 'length',
       type: 'text',
     },
     {
-      name: 'population',
+      name: 'cost_in_credits',
       type: 'text',
     },
     {
-      name: 'climate',
+      name: 'crew',
       type: 'text',
     },
     {
-      name: 'terrain',
+      name: 'passengers',
       type: 'text',
     },
     {
-      name: 'surface_water',
+      name: 'max_atmosphering_speed',
       type: 'text',
     },
     {
-      name: 'residents',
-      type: 'relationship',
-      relationTo: 'characters',
-      hasMany: true,
-      index: true,
+      name: 'cargo_capacity',
+      type: 'text',
+    },
+    {
+      name: 'consumables',
+      type: 'text',
     },
     {
       name: 'films',
       type: 'relationship',
       relationTo: 'films',
+      hasMany: true,
+      index: true,
+    },
+    {
+      name: 'pilots',
+      type: 'relationship',
+      relationTo: 'characters',
       hasMany: true,
       index: true,
     },

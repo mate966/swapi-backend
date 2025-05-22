@@ -1,39 +1,58 @@
 import type { CollectionConfig } from 'payload'
 
-export const Films: CollectionConfig = {
-  slug: 'films',
+export const CharactersCollection: CollectionConfig = {
+  slug: 'characters',
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: 'name',
     group: 'Compendium',
   },
   fields: [
     {
-      name: 'title',
+      name: 'name',
       type: 'text',
       required: true,
       index: true,
     },
     {
-      name: 'episodeID',
+      name: 'birth_year',
       type: 'text',
-      required: true,
+    },
+    {
+      name: 'eye_color',
+      type: 'text',
+    },
+    {
+      name: 'gender',
+      type: 'text',
+    },
+    {
+      name: 'hair_color',
+      type: 'text',
+    },
+    {
+      name: 'height',
+      type: 'text',
+    },
+    {
+      name: 'mass',
+      type: 'text',
+    },
+    {
+      name: 'skin_color',
+      type: 'text',
+    },
+    {
+      name: 'homeworld',
+      type: 'relationship',
+      relationTo: 'planets',
       index: true,
     },
     {
-      name: 'opening_crawl',
-      type: 'textarea',
-    },
-    {
-      name: 'director',
-      type: 'text',
-    },
-    {
-      name: 'producer',
-      type: 'text',
-    },
-    {
-      name: 'release_date',
-      type: 'text',
+      name: 'films',
+      type: 'relationship',
+      relationTo: 'films',
+      hasMany: true,
+      index: true,
     },
     {
       name: 'species',
@@ -53,20 +72,6 @@ export const Films: CollectionConfig = {
       name: 'vehicles',
       type: 'relationship',
       relationTo: 'vehicles',
-      hasMany: true,
-      index: true,
-    },
-    {
-      name: 'characters',
-      type: 'relationship',
-      relationTo: 'characters',
-      hasMany: true,
-      index: true,
-    },
-    {
-      name: 'planets',
-      type: 'relationship',
-      relationTo: 'planets',
       hasMany: true,
       index: true,
     },

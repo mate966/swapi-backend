@@ -1,27 +1,27 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
-import { fetchAllSWAPIItems } from '../fetchAllSWAPIItems.js'
+import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
 export async function fetchCharacters() {
-  console.log('Importing characters...')
-  try {
-    const characters = await fetchAllSWAPIItems('people')
-    for (const character of characters) {
-      await createOrUpdatePayloadData('characters', {
-        name: character.properties.name,
-        height: character.properties.height,
-        mass: character.properties.mass,
-        hair_color: character.properties.hair_color,
-        skin_color: character.properties.skin_color,
-        eye_color: character.properties.eye_color,
-        birth_year: character.properties.birth_year,
-        gender: character.properties.gender,
-        swapiId: character.uid,
-      })
-    }
-    console.log('Characters import finished!')
-    return characters
-  } catch (error) {
-    console.error('Error fetching characters:', error)
-    throw error
-  }
+	console.log('Importing characters...')
+	try {
+		const characters = await fetchAllSWAPIItems('people')
+		for (const character of characters) {
+			await createOrUpdatePayloadData('characters', {
+				name: character.properties.name,
+				height: character.properties.height,
+				mass: character.properties.mass,
+				hair_color: character.properties.hair_color,
+				skin_color: character.properties.skin_color,
+				eye_color: character.properties.eye_color,
+				birth_year: character.properties.birth_year,
+				gender: character.properties.gender,
+				swapiId: character.uid,
+			})
+		}
+		console.log('Characters import finished!')
+		return characters
+	} catch (error) {
+		console.error('Error fetching characters:', error)
+		throw error
+	}
 }

@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
-export const Vehicles: CollectionConfig = {
-  slug: 'vehicles',
+export const SpeciesCollection: CollectionConfig = {
+  slug: 'species',
   admin: {
     useAsTitle: 'name',
     group: 'Compendium',
@@ -14,56 +14,54 @@ export const Vehicles: CollectionConfig = {
       index: true,
     },
     {
-      name: 'model',
+      name: 'classification',
       type: 'text',
     },
     {
-      name: 'vehicle_class',
+      name: 'designation',
       type: 'text',
     },
     {
-      name: 'manufacturer',
+      name: 'average_height',
       type: 'text',
     },
     {
-      name: 'length',
+      name: 'average_lifespan',
       type: 'text',
     },
     {
-      name: 'cost_in_credits',
+      name: 'eye_colors',
       type: 'text',
     },
     {
-      name: 'crew',
+      name: 'hair_colors',
       type: 'text',
     },
     {
-      name: 'passengers',
+      name: 'skin_colors',
       type: 'text',
     },
     {
-      name: 'max_atmosphering_speed',
+      name: 'language',
       type: 'text',
     },
     {
-      name: 'cargo_capacity',
-      type: 'text',
+      name: 'homeworld',
+      type: 'relationship',
+      relationTo: 'planets',
+      index: true,
     },
     {
-      name: 'consumables',
-      type: 'text',
+      name: 'people',
+      type: 'relationship',
+      relationTo: 'characters',
+      hasMany: true,
+      index: true,
     },
     {
       name: 'films',
       type: 'relationship',
       relationTo: 'films',
-      hasMany: true,
-      index: true,
-    },
-    {
-      name: 'pilots',
-      type: 'relationship',
-      relationTo: 'characters',
       hasMany: true,
       index: true,
     },

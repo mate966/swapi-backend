@@ -7,38 +7,52 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Navigation } from './collections/Navigation'
-import { Films } from './collections/Films'
-import { Characters } from './collections/Characters'
-import { Planets } from './collections/Planets'
-import { Species } from './collections/Species'
-import { Starships } from './collections/Starships'
-import { Vehicles } from './collections/Vehicles'
+import { UsersCollection } from './collections/Users/Users.collection'
+import { MediaCollection } from './collections/Media/Media.collection'
+import { FilmsCollection } from './collections/Films/Films.collection'
+import { CharactersCollection } from './collections/Characters/Characters.collection'
+import { PlanetsCollection } from './collections/Planets/Planets.collection'
+import { SpeciesCollection } from './collections/Species/Species.collection'
+import { StarshipsCollection } from './collections/Starships/Starships.collection'
+import { VehiclesCollection } from './collections/Vehicles/Vehicles.collection'
+import { PagesCollection } from './collections/Pages/Pages.collection'
+
+import { HeaderGlobal } from './globals/Header/Header.global'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  admin: {
-    user: Users.slug,
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
-  },
-  collections: [Users, Media, Navigation, Films, Characters, Planets, Species, Starships, Vehicles],
-  editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
-  }),
-  sharp,
-  plugins: [
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
-  ],
+	admin: {
+		user: UsersCollection.slug,
+		importMap: {
+			baseDir: path.resolve(dirname),
+		},
+	},
+	cors: ['http://localhost:5173', 'http://192.168.55.101:5173'],
+	globals: [HeaderGlobal],
+	collections: [
+		UsersCollection,
+		MediaCollection,
+		FilmsCollection,
+		CharactersCollection,
+		PlanetsCollection,
+		SpeciesCollection,
+		StarshipsCollection,
+		VehiclesCollection,
+		PagesCollection,
+	],
+	editor: lexicalEditor(),
+	secret: process.env.PAYLOAD_SECRET || '',
+	typescript: {
+		outputFile: path.resolve(dirname, 'payload-types.ts'),
+	},
+	db: mongooseAdapter({
+		url: process.env.DATABASE_URI || '',
+	}),
+	sharp,
+	plugins: [
+		payloadCloudPlugin(),
+		// storage-adapter-placeholder
+	],
 })

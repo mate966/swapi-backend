@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload'
 
-export const Species: CollectionConfig = {
-  slug: 'species',
+export const StarshipsCollection: CollectionConfig = {
+  slug: 'starships',
   admin: {
     useAsTitle: 'name',
     group: 'Compendium',
@@ -11,65 +11,67 @@ export const Species: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      index: true,
     },
     {
-      name: 'classification',
+      name: 'model',
       type: 'text',
     },
     {
-      name: 'designation',
+      name: 'starship_class',
       type: 'text',
     },
     {
-      name: 'average_height',
+      name: 'manufacturer',
       type: 'text',
     },
     {
-      name: 'average_lifespan',
+      name: 'cost_in_credits',
       type: 'text',
     },
     {
-      name: 'eye_colors',
+      name: 'length',
       type: 'text',
     },
     {
-      name: 'hair_colors',
+      name: 'crew',
       type: 'text',
     },
     {
-      name: 'skin_colors',
+      name: 'passengers',
       type: 'text',
     },
     {
-      name: 'language',
+      name: 'max_atmosphering_speed',
       type: 'text',
     },
     {
-      name: 'homeworld',
-      type: 'relationship',
-      relationTo: 'planets',
-      index: true,
+      name: 'hyperdrive_rating',
+      type: 'text',
     },
     {
-      name: 'people',
-      type: 'relationship',
-      relationTo: 'characters',
-      hasMany: true,
-      index: true,
+      name: 'cargo_capacity',
+      type: 'text',
+    },
+    {
+      name: 'consumables',
+      type: 'text',
     },
     {
       name: 'films',
       type: 'relationship',
       relationTo: 'films',
       hasMany: true,
-      index: true,
+    },
+    {
+      name: 'pilots',
+      type: 'relationship',
+      relationTo: 'characters',
+      hasMany: true,
     },
     {
       name: 'swapiId',
       type: 'text',
       unique: true,
-      index: true,
     },
   ],
 }
