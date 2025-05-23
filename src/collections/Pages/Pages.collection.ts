@@ -5,6 +5,7 @@ import { SlugStaticField } from '@/fields/Slug/Slug.field'
 
 import { HeroBlock } from '@/blocks/Hero/Hero.block'
 import { TextBlock } from '@/blocks/Text/Text.block'
+import { CtaBlock } from '@/blocks/Cta/Cta'
 
 type PageContentType = (options?: { blocks?: [Block, ...Block[]] }) => Field
 
@@ -63,7 +64,7 @@ export const PagesCollection: CollectionConfig = {
 		},
 		SlugStaticField({}),
 		PageContent({
-			blocks: [HeroBlock, TextBlock],
+			blocks: [HeroBlock, TextBlock, CtaBlock],
 		}),
 	],
 }

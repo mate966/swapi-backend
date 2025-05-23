@@ -28,15 +28,6 @@ export const TextBlock: Block = {
 			required: true,
 		},
 		{
-			name: 'updated_date',
-			type: 'text',
-			label: 'Last updated date',
-			admin: {
-				description:
-					'This date will be displayed on the website under the section title to show when the content was last updated.',
-			},
-		},
-		{
 			name: 'text',
 			type: 'richText',
 			label: 'Text',

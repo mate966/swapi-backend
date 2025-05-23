@@ -18,6 +18,7 @@ import { VehiclesCollection } from './collections/Vehicles/Vehicles.collection'
 import { PagesCollection } from './collections/Pages/Pages.collection'
 
 import { HeaderGlobal } from './globals/Header/Header.global'
+import { FooterGlobal } from './globals/Footer/Footer.global'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,7 +31,7 @@ export default buildConfig({
 		},
 	},
 	cors: ['http://localhost:5173', 'http://192.168.55.101:5173'],
-	globals: [HeaderGlobal],
+	globals: [HeaderGlobal, FooterGlobal],
 	collections: [
 		UsersCollection,
 		MediaCollection,

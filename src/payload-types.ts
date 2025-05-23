@@ -100,9 +100,11 @@ export interface Config {
   };
   globals: {
     header: Header;
+    footer: Footer;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   user: User & {
@@ -312,7 +314,7 @@ export interface Page {
    * To create a homepage, use the slug "home"
    */
   slug: string;
-  content?: (HeroBlock | TextBlock)[] | null;
+  content?: (HeroBlock | TextBlock | CtaBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -326,7 +328,7 @@ export interface HeroBlock {
   image?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'Hero';
+  blockType: 'hero_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -334,10 +336,6 @@ export interface HeroBlock {
  */
 export interface TextBlock {
   title: string;
-  /**
-   * This date will be displayed on the website under the section title to show when the content was last updated.
-   */
-  updated_date?: string | null;
   text: {
     root: {
       type: string;
@@ -356,6 +354,28 @@ export interface TextBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'text_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock".
+ */
+export interface CtaBlock {
+  title: string;
+  copy: string;
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    scroll_to_id?: string | null;
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -613,8 +633,9 @@ export interface PagesSelect<T extends boolean = true> {
   content?:
     | T
     | {
-        Hero?: T | HeroBlockSelect<T>;
+        hero_block?: T | HeroBlockSelect<T>;
         text_block?: T | TextBlockSelect<T>;
+        cta_block?: T | CtaBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -636,8 +657,27 @@ export interface HeroBlockSelect<T extends boolean = true> {
  */
 export interface TextBlockSelect<T extends boolean = true> {
   title?: T;
-  updated_date?: T;
   text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CtaBlock_select".
+ */
+export interface CtaBlockSelect<T extends boolean = true> {
+  title?: T;
+  copy?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        scroll_to_id?: T;
+        url?: T;
+        label?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -680,35 +720,103 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface Header {
   id: string;
   nav: {
-    link: {
-      type?: ('reference' | 'custom') | null;
-      newTab?: boolean | null;
-      reference?: {
-        relationTo: 'pages';
-        value: string | Page;
-      } | null;
-      scroll_to_id?: string | null;
-      url?: string | null;
-      label: string;
+    navigation: {
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'pages';
+          value: string | Page;
+        } | null;
+        scroll_to_id?: string | null;
+        url?: string | null;
+        label: string;
+      };
+      subnav?:
+        | {
+            link: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'pages';
+                value: string | Page;
+              } | null;
+              scroll_to_id?: string | null;
+              url?: string | null;
+              label: string;
+            };
+            id?: string | null;
+          }[]
+        | null;
     };
-    subnav?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?: {
-              relationTo: 'pages';
-              value: string | Page;
-            } | null;
-            scroll_to_id?: string | null;
-            url?: string | null;
-            label: string;
-          };
-          id?: string | null;
-        }[]
-      | null;
     id?: string | null;
   }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  title: string;
+  copy: string;
+  copyright: string;
+  nav: {
+    navigation: {
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?: {
+          relationTo: 'pages';
+          value: string | Page;
+        } | null;
+        scroll_to_id?: string | null;
+        url?: string | null;
+        label: string;
+      };
+      subnav?:
+        | {
+            link: {
+              type?: ('reference' | 'custom') | null;
+              newTab?: boolean | null;
+              reference?: {
+                relationTo: 'pages';
+                value: string | Page;
+              } | null;
+              scroll_to_id?: string | null;
+              url?: string | null;
+              label: string;
+            };
+            id?: string | null;
+          }[]
+        | null;
+    };
+    id?: string | null;
+  }[];
+  socials?:
+    | {
+        social?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?: {
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null;
+                scroll_to_id?: string | null;
+                url?: string | null;
+                label: string;
+              };
+              icon: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -720,17 +828,7 @@ export interface HeaderSelect<T extends boolean = true> {
   nav?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              scroll_to_id?: T;
-              url?: T;
-              label?: T;
-            };
-        subnav?:
+        navigation?:
           | T
           | {
               link?:
@@ -743,6 +841,87 @@ export interface HeaderSelect<T extends boolean = true> {
                     url?: T;
                     label?: T;
                   };
+              subnav?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          scroll_to_id?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  title?: T;
+  copy?: T;
+  copyright?: T;
+  nav?:
+    | T
+    | {
+        navigation?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    scroll_to_id?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              subnav?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          scroll_to_id?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+            };
+        id?: T;
+      };
+  socials?:
+    | T
+    | {
+        social?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    scroll_to_id?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              icon?: T;
               id?: T;
             };
         id?: T;
