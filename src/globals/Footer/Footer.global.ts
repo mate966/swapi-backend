@@ -46,15 +46,10 @@ export const FooterGlobal: GlobalConfig = {
 			admin: {
 				initCollapsed: true,
 				components: {
-					RowLabel: '@/globals/Header/ui/RowLabel#RowLabel',
+					RowLabel: '@/ui/RowLabel/RowLabel',
 				},
 			},
 		},
-		{
-			name: 'socials',
-			type: 'array',
-			label: 'Socials',
-			fields: [SocialField()],
-		},
+		SocialField(),
 	],
 }

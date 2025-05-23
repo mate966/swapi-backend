@@ -795,25 +795,13 @@ export interface Footer {
     };
     id?: string | null;
   }[];
-  socials?:
+  social?:
     | {
-        social?:
-          | {
-              link: {
-                type?: ('reference' | 'custom') | null;
-                newTab?: boolean | null;
-                reference?: {
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null;
-                scroll_to_id?: string | null;
-                url?: string | null;
-                label: string;
-              };
-              icon: string;
-              id?: string | null;
-            }[]
-          | null;
+        link: {
+          url: string;
+          newTab?: boolean | null;
+        };
+        icon?: ('facebook' | 'linkedin' | 'github') | null;
         id?: string | null;
       }[]
     | null;
@@ -905,25 +893,16 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
-  socials?:
+  social?:
     | T
     | {
-        social?:
+        link?:
           | T
           | {
-              link?:
-                | T
-                | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    scroll_to_id?: T;
-                    url?: T;
-                    label?: T;
-                  };
-              icon?: T;
-              id?: T;
+              url?: T;
+              newTab?: T;
             };
+        icon?: T;
         id?: T;
       };
   updatedAt?: T;

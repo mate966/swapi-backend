@@ -24,7 +24,7 @@ export const NavigationField = (): Field => ({
 					fields: [LinkField()],
 					admin: {
 						components: {
-							RowLabel: '@/globals/Header/ui/RowLabel#RowLabel',
+							RowLabel: '@/ui/RowLabel/RowLabel',
 						},
 					},
 				},
