@@ -315,7 +315,7 @@ export interface Page {
    * To create a homepage, use the slug "home"
    */
   slug: string;
-  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock)[] | null;
+  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock | AboutBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -326,8 +326,11 @@ export interface Page {
 export interface HeroBlock {
   title?: string | null;
   description?: string | null;
-  imageDesktop: string | Media;
-  imageMobile?: (string | null) | Media;
+  background: {
+    imageDesktop: string | Media;
+    imageMobile?: (string | null) | Media;
+    caption?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_block';
@@ -395,12 +398,44 @@ export interface QuoteBlock {
  * via the `definition` "ImageBlock".
  */
 export interface ImageBlock {
-  imageDesktop: string | Media;
-  imageMobile?: (string | null) | Media;
-  caption?: string | null;
+  image: {
+    imageDesktop: string | Media;
+    imageMobile?: (string | null) | Media;
+    caption?: string | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'image_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutBlock".
+ */
+export interface AboutBlock {
+  title: string;
+  text: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  image: {
+    imageDesktop: string | Media;
+    imageMobile?: (string | null) | Media;
+    caption?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'about_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -664,6 +699,7 @@ export interface PagesSelect<T extends boolean = true> {
         cta_block?: T | CtaBlockSelect<T>;
         quote_block?: T | QuoteBlockSelect<T>;
         image_block?: T | ImageBlockSelect<T>;
+        about_block?: T | AboutBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -675,8 +711,13 @@ export interface PagesSelect<T extends boolean = true> {
 export interface HeroBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  imageDesktop?: T;
-  imageMobile?: T;
+  background?:
+    | T
+    | {
+        imageDesktop?: T;
+        imageMobile?: T;
+        caption?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -725,9 +766,30 @@ export interface QuoteBlockSelect<T extends boolean = true> {
  * via the `definition` "ImageBlock_select".
  */
 export interface ImageBlockSelect<T extends boolean = true> {
-  imageDesktop?: T;
-  imageMobile?: T;
-  caption?: T;
+  image?:
+    | T
+    | {
+        imageDesktop?: T;
+        imageMobile?: T;
+        caption?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutBlock_select".
+ */
+export interface AboutBlockSelect<T extends boolean = true> {
+  title?: T;
+  text?: T;
+  image?:
+    | T
+    | {
+        imageDesktop?: T;
+        imageMobile?: T;
+        caption?: T;
+      };
   id?: T;
   blockName?: T;
 }

@@ -1,12 +1,7 @@
 import type { Field } from 'payload'
 
 import deepMerge from '@/utils/deepMerge'
-
-type LinkType = (options?: {
-	overrides?: Record<string, unknown>
-	disableLabel?: boolean
-	defaultValue?: 'reference' | 'custom'
-}) => Field
+import { LinkType } from './link.types'
 
 export const LinkField: LinkType = ({ disableLabel = false, overrides = {} } = {}) => {
 	const linkResult: Field = {

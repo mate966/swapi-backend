@@ -1,3 +1,4 @@
+import { Image } from '@/fields/Image/Image.field'
 import { Block } from 'payload'
 
 export const ImageBlock: Block = {
@@ -7,21 +8,5 @@ export const ImageBlock: Block = {
 		singular: 'Image',
 		plural: 'Images',
 	},
-	fields: [
-		{
-			name: 'imageDesktop',
-			type: 'upload',
-			relationTo: 'media',
-			required: true,
-		},
-		{
-			name: 'imageMobile',
-			type: 'upload',
-			relationTo: 'media',
-		},
-		{
-			name: 'caption',
-			type: 'text',
-		},
-	],
+	fields: [Image({ name: 'image', caption: false })],
 }

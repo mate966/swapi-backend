@@ -4,6 +4,7 @@ import { anyone } from '@/access/anyone'
 import { SlugStaticField } from '@/fields/Slug/Slug.field'
 
 import { HeroBlock } from '@/blocks/Hero/Hero.block'
+import { AboutBlock } from '@/blocks/About/About.block'
 import { TextBlock } from '@/blocks/Text/Text.block'
 import { CtaBlock } from '@/blocks/Cta/Cta.block'
 import { QuoteBlock } from '@/blocks/Quote/Quote.block'
@@ -66,7 +67,7 @@ export const PagesCollection: CollectionConfig = {
 		},
 		SlugStaticField({}),
 		PageContent({
-			blocks: [HeroBlock, TextBlock, CtaBlock, QuoteBlock, ImageBlock],
+			blocks: [HeroBlock, TextBlock, CtaBlock, QuoteBlock, ImageBlock, AboutBlock],
 		}),
 	],
 }

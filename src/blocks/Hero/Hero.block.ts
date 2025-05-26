@@ -1,4 +1,5 @@
-import { Block } from 'payload'
+import type { Block } from 'payload'
+import { Image } from '@/fields/Image/Image.field'
 
 export const HeroBlock: Block = {
 	slug: 'hero_block',
@@ -16,16 +17,9 @@ export const HeroBlock: Block = {
 			name: 'description',
 			type: 'text',
 		},
-		{
-			name: 'imageDesktop',
-			type: 'upload',
-			relationTo: 'media',
-			required: true,
-		},
-		{
-			name: 'imageMobile',
-			type: 'upload',
-			relationTo: 'media',
-		},
+		Image({
+			name: 'background',
+			caption: false,
+		}),
 	],
 }
