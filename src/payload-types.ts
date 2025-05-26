@@ -157,6 +157,7 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
+  webpUrl?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -314,7 +315,7 @@ export interface Page {
    * To create a homepage, use the slug "home"
    */
   slug: string;
-  content?: (HeroBlock | TextBlock | CtaBlock)[] | null;
+  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -325,7 +326,8 @@ export interface Page {
 export interface HeroBlock {
   title?: string | null;
   description?: string | null;
-  image?: (string | null) | Media;
+  imageDesktop: string | Media;
+  imageMobile?: (string | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'hero_block';
@@ -376,6 +378,29 @@ export interface CtaBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  quote: string;
+  author: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quote_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock".
+ */
+export interface ImageBlock {
+  imageDesktop: string | Media;
+  imageMobile?: (string | null) | Media;
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -483,6 +508,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  webpUrl?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -636,6 +662,8 @@ export interface PagesSelect<T extends boolean = true> {
         hero_block?: T | HeroBlockSelect<T>;
         text_block?: T | TextBlockSelect<T>;
         cta_block?: T | CtaBlockSelect<T>;
+        quote_block?: T | QuoteBlockSelect<T>;
+        image_block?: T | ImageBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -647,7 +675,8 @@ export interface PagesSelect<T extends boolean = true> {
 export interface HeroBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
-  image?: T;
+  imageDesktop?: T;
+  imageMobile?: T;
   id?: T;
   blockName?: T;
 }
@@ -678,6 +707,27 @@ export interface CtaBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock_select".
+ */
+export interface QuoteBlockSelect<T extends boolean = true> {
+  quote?: T;
+  author?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageBlock_select".
+ */
+export interface ImageBlockSelect<T extends boolean = true> {
+  imageDesktop?: T;
+  imageMobile?: T;
+  caption?: T;
   id?: T;
   blockName?: T;
 }

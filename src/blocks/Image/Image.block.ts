@@ -1,21 +1,13 @@
 import { Block } from 'payload'
 
-export const HeroBlock: Block = {
-	slug: 'hero_block',
-	interfaceName: 'HeroBlock',
+export const ImageBlock: Block = {
+	slug: 'image_block',
+	interfaceName: 'ImageBlock',
 	labels: {
-		singular: 'Hero',
-		plural: 'Hero',
+		singular: 'Image',
+		plural: 'Images',
 	},
 	fields: [
-		{
-			name: 'title',
-			type: 'text',
-		},
-		{
-			name: 'description',
-			type: 'text',
-		},
 		{
 			name: 'imageDesktop',
 			type: 'upload',
@@ -26,6 +18,10 @@ export const HeroBlock: Block = {
 			name: 'imageMobile',
 			type: 'upload',
 			relationTo: 'media',
+		},
+		{
+			name: 'caption',
+			type: 'text',
 		},
 	],
 }
