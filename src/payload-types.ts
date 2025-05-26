@@ -433,6 +433,17 @@ export interface AboutBlock {
     imageMobile?: (string | null) | Media;
     caption?: string | null;
   };
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    scroll_to_id?: string | null;
+    url?: string | null;
+    label: string;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'about_block';
@@ -789,6 +800,16 @@ export interface AboutBlockSelect<T extends boolean = true> {
         imageDesktop?: T;
         imageMobile?: T;
         caption?: T;
+      };
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        scroll_to_id?: T;
+        url?: T;
+        label?: T;
       };
   id?: T;
   blockName?: T;

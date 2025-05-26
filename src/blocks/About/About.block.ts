@@ -1,6 +1,6 @@
 import { Block } from 'payload'
 import { Image } from '@/fields/Image/Image.field'
-
+import { LinkField } from '@/fields/Link/Link.field'
 import {
 	AlignFeature,
 	ParagraphFeature,
@@ -51,5 +51,6 @@ export const AboutBlock: Block = {
 			name: 'image',
 			caption: true,
 		}),
+		LinkField({}),
 	],
 }
