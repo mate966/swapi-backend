@@ -311,11 +311,26 @@ export interface Vehicle {
 export interface Page {
   id: string;
   title: string;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+  };
   /**
    * To create a homepage, use the slug "home"
    */
   slug: string;
-  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock | AboutBlock | FeaturedBlock)[] | null;
+  content?:
+    | (
+        | HeroBlock
+        | TextBlock
+        | CtaBlock
+        | QuoteBlock
+        | ImageBlock
+        | AboutBlock
+        | FeaturedBlock
+        | CompendiumCategoryBlock
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -477,6 +492,16 @@ export interface FeaturedBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'featured_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CompendiumCategoryBlock".
+ */
+export interface CompendiumCategoryBlock {
+  category: 'characters' | 'planets' | 'starships' | 'vehicles' | 'species' | 'films';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'compendium_category_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -731,6 +756,12 @@ export interface VehiclesSelect<T extends boolean = true> {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+      };
   slug?: T;
   content?:
     | T
@@ -742,6 +773,7 @@ export interface PagesSelect<T extends boolean = true> {
         image_block?: T | ImageBlockSelect<T>;
         about_block?: T | AboutBlockSelect<T>;
         featured_block?: T | FeaturedBlockSelect<T>;
+        compendium_category_block?: T | CompendiumCategoryBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -872,6 +904,15 @@ export interface FeaturedBlockSelect<T extends boolean = true> {
         url?: T;
         label?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CompendiumCategoryBlock_select".
+ */
+export interface CompendiumCategoryBlockSelect<T extends boolean = true> {
+  category?: T;
   id?: T;
   blockName?: T;
 }

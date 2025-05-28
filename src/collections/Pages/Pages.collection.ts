@@ -10,6 +10,7 @@ import { CtaBlock } from '@/blocks/Cta/Cta.block'
 import { QuoteBlock } from '@/blocks/Quote/Quote.block'
 import { ImageBlock } from '@/blocks/Image/Image.block'
 import { FeaturedBlock } from '@/blocks/Featured/Featured.block'
+import { CompendiumCategoryBlock } from '@/blocks/CompendiumCategory/CompendiumCategory.block'
 
 type PageContentType = (options?: { blocks?: [Block, ...Block[]] }) => Field
 
@@ -66,6 +67,23 @@ export const PagesCollection: CollectionConfig = {
 			type: 'text',
 			required: true,
 		},
+		{
+			name: 'seo',
+			type: 'group',
+			label: 'SEO',
+			fields: [
+				{
+					name: 'metaTitle',
+					type: 'text',
+					label: 'Meta Title',
+				},
+				{
+					name: 'metaDescription',
+					type: 'textarea',
+					label: 'Meta Description',
+				},
+			],
+		},
 		SlugStaticField({}),
 		PageContent({
 			blocks: [
@@ -76,6 +94,7 @@ export const PagesCollection: CollectionConfig = {
 				ImageBlock,
 				AboutBlock,
 				FeaturedBlock,
+				CompendiumCategoryBlock,
 			],
 		}),
 	],

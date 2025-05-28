@@ -30,7 +30,7 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	cors: ['http://localhost:5173', 'http://192.168.55.101:5173'],
+	cors: ['http://localhost:5173', 'http://192.168.55.108:5173'],
 	globals: [HeaderGlobal, FooterGlobal],
 	collections: [
 		UsersCollection,

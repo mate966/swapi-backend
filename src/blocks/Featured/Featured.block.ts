@@ -1,5 +1,5 @@
 import { LinkField } from '@/fields/Link/Link.field'
-import { RelationshipField } from '@/fields/Relationship/Relationship'
+import { RelationshipField } from '@/fields/Relationship/Relationship.field'
 import { Block } from 'payload'
 import type { Where } from 'payload'
 
