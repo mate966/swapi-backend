@@ -315,7 +315,7 @@ export interface Page {
    * To create a homepage, use the slug "home"
    */
   slug: string;
-  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock | AboutBlock)[] | null;
+  content?: (HeroBlock | TextBlock | CtaBlock | QuoteBlock | ImageBlock | AboutBlock | FeaturedBlock)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -447,6 +447,36 @@ export interface AboutBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'about_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedBlock".
+ */
+export interface FeaturedBlock {
+  title: string;
+  linkedItem: {
+    category: 'characters' | 'planets' | 'starships' | 'vehicles' | 'species' | 'films';
+    item_characters?: (string | Character)[] | null;
+    item_planets?: (string | Planet)[] | null;
+    item_starships?: (string | Starship)[] | null;
+    item_vehicles?: (string | Vehicle)[] | null;
+    item_species?: (string | Species)[] | null;
+    item_films?: (string | Film)[] | null;
+  };
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?: {
+      relationTo: 'pages';
+      value: string | Page;
+    } | null;
+    scroll_to_id?: string | null;
+    url?: string | null;
+    label: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featured_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -711,6 +741,7 @@ export interface PagesSelect<T extends boolean = true> {
         quote_block?: T | QuoteBlockSelect<T>;
         image_block?: T | ImageBlockSelect<T>;
         about_block?: T | AboutBlockSelect<T>;
+        featured_block?: T | FeaturedBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -800,6 +831,36 @@ export interface AboutBlockSelect<T extends boolean = true> {
         imageDesktop?: T;
         imageMobile?: T;
         caption?: T;
+      };
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        scroll_to_id?: T;
+        url?: T;
+        label?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedBlock_select".
+ */
+export interface FeaturedBlockSelect<T extends boolean = true> {
+  title?: T;
+  linkedItem?:
+    | T
+    | {
+        category?: T;
+        item_characters?: T;
+        item_planets?: T;
+        item_starships?: T;
+        item_vehicles?: T;
+        item_species?: T;
+        item_films?: T;
       };
   link?:
     | T

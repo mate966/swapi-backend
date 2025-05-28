@@ -9,6 +9,7 @@ import { TextBlock } from '@/blocks/Text/Text.block'
 import { CtaBlock } from '@/blocks/Cta/Cta.block'
 import { QuoteBlock } from '@/blocks/Quote/Quote.block'
 import { ImageBlock } from '@/blocks/Image/Image.block'
+import { FeaturedBlock } from '@/blocks/Featured/Featured.block'
 
 type PageContentType = (options?: { blocks?: [Block, ...Block[]] }) => Field
 
@@ -67,7 +68,15 @@ export const PagesCollection: CollectionConfig = {
 		},
 		SlugStaticField({}),
 		PageContent({
-			blocks: [HeroBlock, TextBlock, CtaBlock, QuoteBlock, ImageBlock, AboutBlock],
+			blocks: [
+				HeroBlock,
+				TextBlock,
+				CtaBlock,
+				QuoteBlock,
+				ImageBlock,
+				AboutBlock,
+				FeaturedBlock,
+			],
 		}),
 	],
 }
