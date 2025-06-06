@@ -11,6 +11,8 @@ import { QuoteBlock } from '@/blocks/Quote/Quote.block'
 import { ImageBlock } from '@/blocks/Image/Image.block'
 import { FeaturedBlock } from '@/blocks/Featured/Featured.block'
 import { CompendiumCategoryBlock } from '@/blocks/CompendiumCategory/CompendiumCategory.block'
+import { GalleryBlock } from '@/blocks/Gallery/Gallery.block'
+import { ContactFormBlock } from '@/blocks/ContactForm/ContactForm.block'
 
 type PageContentType = (options?: { blocks?: [Block, ...Block[]] }) => Field
 
@@ -95,6 +97,8 @@ export const PagesCollection: CollectionConfig = {
 				AboutBlock,
 				FeaturedBlock,
 				CompendiumCategoryBlock,
+				GalleryBlock,
+				ContactFormBlock,
 			],
 		}),
 	],

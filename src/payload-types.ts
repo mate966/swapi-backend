@@ -329,6 +329,8 @@ export interface Page {
         | AboutBlock
         | FeaturedBlock
         | CompendiumCategoryBlock
+        | GalleryBlock
+        | ContactFormBlock
       )[]
     | null;
   updatedAt: string;
@@ -502,6 +504,36 @@ export interface CompendiumCategoryBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'compendium_category_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  images?:
+    | {
+        image: {
+          imageDesktop: string | Media;
+          imageMobile?: (string | null) | Media;
+          caption?: string | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery_block';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormBlock".
+ */
+export interface ContactFormBlock {
+  title?: string | null;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact_form_block';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -774,6 +806,8 @@ export interface PagesSelect<T extends boolean = true> {
         about_block?: T | AboutBlockSelect<T>;
         featured_block?: T | FeaturedBlockSelect<T>;
         compendium_category_block?: T | CompendiumCategoryBlockSelect<T>;
+        gallery_block?: T | GalleryBlockSelect<T>;
+        contact_form_block?: T | ContactFormBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -913,6 +947,36 @@ export interface FeaturedBlockSelect<T extends boolean = true> {
  */
 export interface CompendiumCategoryBlockSelect<T extends boolean = true> {
   category?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  images?:
+    | T
+    | {
+        image?:
+          | T
+          | {
+              imageDesktop?: T;
+              imageMobile?: T;
+              caption?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactFormBlock_select".
+ */
+export interface ContactFormBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }
