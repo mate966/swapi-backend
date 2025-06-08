@@ -30,7 +30,13 @@ export default buildConfig({
 			baseDir: path.resolve(dirname),
 		},
 	},
-	cors: ['http://localhost:5173', 'http://192.168.55.108:5173'],
+	cors: [
+		'http://localhost:5173',
+		'http://localhost:5174',
+		'http://192.168.55.106:5174',
+		'http://localhost:3000',
+		'http://172.20.10.12:5173',
+	],
 	globals: [HeaderGlobal, FooterGlobal],
 	collections: [
 		UsersCollection,
@@ -43,6 +49,9 @@ export default buildConfig({
 		VehiclesCollection,
 		PagesCollection,
 	],
+	graphQL: {
+		schemaOutputFile: path.resolve(dirname, 'generated-schema.graphql'),
+	},
 	editor: lexicalEditor(),
 	secret: process.env.PAYLOAD_SECRET || '',
 	typescript: {
