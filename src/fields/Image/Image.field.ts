@@ -19,7 +19,7 @@ export const Image = ({ name, caption }: { name: string; caption: boolean }): Fi
 			name: 'caption',
 			type: 'text',
 			admin: {
-				condition: (data, siblingData) => caption,
+				condition: () => caption,
 			},
 		},
 	],

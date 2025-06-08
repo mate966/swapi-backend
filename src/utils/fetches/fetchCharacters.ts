@@ -1,10 +1,25 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
+interface SWAPICharacter {
+	uid: string
+	properties: {
+		name: string
+		height: string
+		mass: string
+		hair_color: string
+		skin_color: string
+		eye_color: string
+		birth_year: string
+		gender: string
+		[key: string]: unknown
+	}
+}
+
 export async function fetchCharacters() {
 	console.log('Importing characters...')
 	try {
-		const characters = await fetchAllSWAPIItems('people')
+		const characters = (await fetchAllSWAPIItems('people')) as unknown as SWAPICharacter[]
 		for (const character of characters) {
 			await createOrUpdatePayloadData('characters', {
 				name: character.properties.name,

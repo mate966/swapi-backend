@@ -3,7 +3,7 @@ import sharp from 'sharp'
 import path from 'path'
 import fs from 'fs'
 
-export const generateWebp: CollectionAfterChangeHook = async ({ doc, req }) => {
+export const generateWebp: CollectionAfterChangeHook = async ({ doc }) => {
 	if (!doc.filename || !doc.mimeType?.startsWith('image/')) {
 		return doc
 	}

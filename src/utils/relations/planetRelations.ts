@@ -2,11 +2,19 @@ import { buildSwapiIdToPayloadIdMap } from '../buildSwapiIdToPayloadIdMap.js'
 import { fetchAllSWAPIItems } from '../fetches/fetchAllSWAPIItems.js'
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 
+interface SWAPIPlanet {
+	uid: string
+	properties: {
+		films: string[]
+		residents: string[]
+	}
+}
+
 export async function updatePlanetRelations() {
 	const filmsMap = await buildSwapiIdToPayloadIdMap('films')
 	const residentsMap = await buildSwapiIdToPayloadIdMap('characters')
 
-	const swapiPlanets = await fetchAllSWAPIItems('planets')
+	const swapiPlanets = (await fetchAllSWAPIItems('planets')) as unknown as SWAPIPlanet[]
 
 	for (const planet of swapiPlanets) {
 		const swapiId = planet.uid

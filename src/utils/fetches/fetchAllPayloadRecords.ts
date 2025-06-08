@@ -12,7 +12,7 @@ export async function fetchAllPayloadRecords(collection: string) {
 	}
 	let page = 1
 	let hasMore = true
-	let allDocs: any[] = []
+	let allDocs: Record<string, unknown>[] = []
 
 	while (hasMore) {
 		const response = await axios.get(

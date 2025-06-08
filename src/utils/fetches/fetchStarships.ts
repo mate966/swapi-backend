@@ -1,10 +1,30 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
+interface SWAPIStarship {
+	uid: string
+	properties: {
+		name: string
+		model: string
+		manufacturer: string
+		cost_in_credits: string
+		length: string
+		max_atmosphering_speed: string
+		crew: string
+		passengers: string
+		cargo_capacity: string
+		consumables: string
+		hyperdrive_rating: string
+		MGLT: string
+		starship_class: string
+		[key: string]: unknown
+	}
+}
+
 export async function fetchStarships() {
 	console.log('Importing starships...')
 	try {
-		const starships = await fetchAllSWAPIItems('starships')
+		const starships = (await fetchAllSWAPIItems('starships')) as unknown as SWAPIStarship[]
 		for (const starship of starships) {
 			await createOrUpdatePayloadData('starships', {
 				name: starship.properties.name,

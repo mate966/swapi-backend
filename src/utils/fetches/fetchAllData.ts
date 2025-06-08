@@ -13,7 +13,7 @@ async function fetchAllData() {
 	try {
 		console.log('Starting full SWAPI import...')
 
-		const [films, planets, characters, species, starships, vehicles] = await Promise.all([
+		const [_films, _planets, _characters, _species, _starships, _vehicles] = await Promise.all([
 			fetchFilms(),
 			fetchPlanets(),
 			fetchCharacters(),

@@ -1,10 +1,26 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
+interface SWAPIPlanet {
+	uid: string
+	properties: {
+		name: string
+		diameter: string
+		rotation_period: string
+		orbital_period: string
+		gravity: string
+		population: string
+		climate: string
+		terrain: string
+		surface_water: string
+		[key: string]: unknown
+	}
+}
+
 export async function fetchPlanets() {
 	console.log('Importing planets...')
 	try {
-		const planets = await fetchAllSWAPIItems('planets')
+		const planets = (await fetchAllSWAPIItems('planets')) as unknown as SWAPIPlanet[]
 		for (const planet of planets) {
 			await createOrUpdatePayloadData('planets', {
 				name: planet.properties.name,

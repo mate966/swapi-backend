@@ -1,10 +1,23 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
+interface SWAPIFilm {
+	uid: string
+	properties: {
+		title: string
+		episode_id: number
+		opening_crawl: string
+		director: string
+		producer: string
+		release_date: string
+		[key: string]: unknown
+	}
+}
+
 export async function fetchFilms() {
 	console.log('Importing films...')
 	try {
-		const films = await fetchAllSWAPIItems('films')
+		const films = (await fetchAllSWAPIItems('films')) as unknown as SWAPIFilm[]
 		for (const film of films) {
 			await createOrUpdatePayloadData('films', {
 				title: film.properties.title,

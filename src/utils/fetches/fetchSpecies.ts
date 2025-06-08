@@ -1,10 +1,26 @@
 import { createOrUpdatePayloadData } from '../createOrUpdatePayloadData.js'
 import { fetchAllSWAPIItems } from './fetchAllSWAPIItems.js'
 
+interface SWAPISpecies {
+	uid: string
+	properties: {
+		name: string
+		classification: string
+		designation: string
+		average_height: string
+		skin_colors: string
+		hair_colors: string
+		eye_colors: string
+		average_lifespan: string
+		language: string
+		[key: string]: unknown
+	}
+}
+
 export async function fetchSpecies() {
 	console.log('Importing species...')
 	try {
-		const species = await fetchAllSWAPIItems('species')
+		const species = (await fetchAllSWAPIItems('species')) as unknown as SWAPISpecies[]
 		for (const specie of species) {
 			await createOrUpdatePayloadData('species', {
 				name: specie.properties.name,
