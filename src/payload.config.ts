@@ -37,6 +37,7 @@ export default buildConfig({
 		'http://192.168.55.106:5173',
 		'http://localhost:3000',
 		'http://172.20.10.12:5173',
+		'https://swapi-phi-eight.vercel.app',
 	],
 	globals: [HeaderGlobal, FooterGlobal],
 	collections: [
